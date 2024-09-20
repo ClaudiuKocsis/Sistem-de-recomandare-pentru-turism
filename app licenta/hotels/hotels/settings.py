@@ -132,4 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'hotels'
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyD5OPU9rFwN6rxvGUXsQmywxG5ZCvn-FDU'
+GOOGLE_MAPS_API_KEY = '...'
