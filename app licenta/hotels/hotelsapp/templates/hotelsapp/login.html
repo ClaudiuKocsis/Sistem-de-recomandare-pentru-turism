@@ -1,0 +1,15 @@
+{% extends 'hotelsapp/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-page">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>If you are not registered yet, <a href="{% url 'register' %}">click here</a> to register.</p>
+</div>
+{% endblock %}

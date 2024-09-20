@@ -1,0 +1,17 @@
+{% extends 'hotelsapp/base.html' %}
+
+{% block title %}Account Details{% endblock %}
+
+{% block content %}
+<div class="account-details-page">
+    <h2>Account Details</h2>
+    <p>Username: {{ user.username }}</p>
+    
+    <h3>Change Password</h3>
+    <form method="post" action="{% url 'change_password' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Change Password</button>
+    </form>
+</div>
+{% endblock %}

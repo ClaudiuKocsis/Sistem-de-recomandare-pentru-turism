@@ -1,0 +1,120 @@
+{% extends 'hotelsapp/base.html' %}
+
+{% block title %}{{ hotel.name }}{% endblock %}
+
+{% block content %}
+<div class="hotel-detail-page">
+    <h2>{{ hotel.name }}</h2>
+    <p>URL: <a href="{{ hotel.url }}" target="_blank">{{ hotel.url }}</a></p>
+    <p>Class: {% if hotel.hotel_class == 0 %}unspecified{% else %}{{ hotel.hotel_class|floatformat:2 }}{% endif %}</p>
+    <p>Overall Rating: {{ overall_rating.average_overall_rating|floatformat:2 }}</p>
+    <p>Number of Reviews: {{ overall_rating.num_reviews }}</p>
+    <p>Location: {{ hotel.address.locality }}</p>
+    <p>Address: {{ hotel.address }}</p>
+    <button onclick="window.open('{{ google_maps_url }}', '_blank')">Open in Google Maps</button>
+    <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+
+    <button class="btn btn-primary review-toggle" onclick="toggleReviewForm()">Write a Review</button>
+    <form method="post" class="review-form" id="review-form" style="display: none; margin-top: 20px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="service">Rate these fields from 1 to 5:</label><br>
+            <label for="service">Service:</label>
+            <input type="number" name="service" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="cleanliness">Cleanliness:</label>
+            <input type="number" name="cleanliness" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="overall">Overall:</label>
+            <input type="number" name="overall" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="value">Value:</label>
+            <input type="number" name="value" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="number" name="location" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="sleep_quality">Sleep Quality:</label>
+            <input type="number" name="sleep_quality" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="rooms">Rooms:</label>
+            <input type="number" name="rooms" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+            <label for="title">Enter the title of your review:</label><br>
+            <input type="text" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="text">Write your detailed review:</label><br>
+            <textarea name="text" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="date_stayed">Enter the date you stayed (e.g., June 2024):</label><br>
+            <input type="text" name="date_stayed" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    
+    <h3>Reviews</h3>
+    <div class="reviews">
+        {% for review in reviews %}
+        <div class="review-box">
+            <h4>{{ review.title }}</h4>
+            <p>Ratings: {{ review.ratings }}</p>
+            <p>{{ review.text }}</p>
+            <p>Author: {{ review.author.username }}</p>
+            <p>Date Stayed: {{ review.date_stayed }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if reviews.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ reviews.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}.
+            </span>
+            
+            {% if reviews.has_next %}
+                <a href="?page={{ reviews.next_page_number }}">next</a>
+                <a href="?page={{ reviews.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+<script>
+    function initMap() {
+        var location = {lat: {{ lat }}, lng: {{ lng }}};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: location
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+
+    function toggleReviewForm() {
+        var form = document.getElementById('review-form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap">
+</script>
+{% endblock %}

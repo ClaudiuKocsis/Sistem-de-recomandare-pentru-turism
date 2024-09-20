@@ -1,0 +1,81 @@
+{% extends 'hotelsapp/base.html' %}
+
+{% block title %}Hotels{% endblock %}
+
+{% block content %}
+<div class="hotels-page">
+    <h2>Recommended Hotels</h2>
+    <div class="recommended-hotels">
+        {% for hotel in recommended_hotels %}
+        <div class="hotel-box">
+            <h3><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></h3>
+            <p>Location: {{ hotel.locality }}</p>
+            <p>Class: {% if hotel.hotel_class == 0 %}unspecified{% else %}{{ hotel.hotel_class }}{% endif %}</p>
+            <p>Overall Rating: {{ hotel.avg_rating|floatformat:2|default:"N/A" }}</p>
+            <p>Reviews: {{ hotel.review_count|default:"N/A" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>All Hotels</h2>
+
+    <form method="get">
+        <div class="filter-section">
+            <label for="min_reviews">Min Reviews:</label>
+            <input type="number" id="min_reviews" name="min_reviews" value="{{ min_reviews }}">
+        </div>
+        <div class="filter-section">
+            <label for="locality">Locality:</label>
+            <input type="text" id="locality" name="locality" value="{{ locality }}">
+        </div>
+        <div class="filter-section">
+            <label for="min_class">Min Class:</label>
+            <input type="number" id="min_class" name="min_class" step="0.5" min="0" max="5" value="{{ min_class }}">
+            <label for="max_class">Max Class:</label>
+            <input type="number" id="max_class" name="max_class" step="0.5" min="0" max="5" value="{{ max_class }}">
+        </div>
+        <div class="filter-section">
+            <label for="sort_by">Sort By:</label>
+            <select id="sort_by" name="sort_by">
+                <option value="">Default</option>
+                <option value="top_rated_asc" {% if sort_by == "top_rated_asc" %}selected{% endif %}>Top Rated (Ascending)</option>
+                <option value="top_rated_desc" {% if sort_by == "top_rated_desc" %}selected{% endif %}>Top Rated (Descending)</option>
+            </select>
+        </div>
+        <div class="filter-buttons">
+            <button type="submit">Filter</button>
+            <a href="{% url 'hotels' %}" class="clear-filters">Clear Filters</a>
+        </div>
+    </form>
+
+    <div class="all-hotels">
+        {% for hotel in page_obj %}
+        <div class="hotel-box">
+            <h3><a href="{% url 'hotel_detail' hotel.id %}">{{ hotel.name }}</a></h3>
+            <p>Location: {{ hotel.locality }}</p>
+            <p>Class: {% if hotel.hotel_class == 0 %}unspecified{% else %}{{ hotel.hotel_class }}{% endif %}</p>
+            <p>Overall Rating: {{ hotel.avg_rating|floatformat:2|default:"N/A" }}</p>
+            <p>Reviews: {{ hotel.review_count|default:"N/A" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page=1">&laquo; first</a>
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">next</a>
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

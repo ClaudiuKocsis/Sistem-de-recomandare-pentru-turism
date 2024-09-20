@@ -1,0 +1,312 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-size: 18px; /* Increased font size */
+}
+
+.navbar {
+    background-color: #f7c948;
+    color: #fff;
+    padding: 15px 30px; /* Increased padding */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px; /* Increased margin */
+    font-size: 20px; /* Increased font size */
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f7c948;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0; /* Align to the left of the username */
+    left: auto; /* Ensure it's positioned to the left */
+}
+
+.navbar .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.navbar .dropbtn {
+    background-color: #f7c948;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px; /* Increased font size */
+}
+
+.home-page .about {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 800px; /* Increased max width */
+}
+
+.home-page .about h1 {
+    font-size: 3em; /* Increased font size */
+    color: #f7c948;
+}
+
+.home-page .about p {
+    font-size: 1.5em; /* Increased font size */
+    margin: 30px 0; /* Increased margin */
+}
+
+.home-page .about button {
+    background-color: #f7c948;
+    color: white;
+    border: none;
+    padding: 15px 30px; /* Increased padding */
+    font-size: 1.2em; /* Increased font size */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.home-page .about button:hover {
+    background-color: #f0b429;
+}
+
+.hotels-page {
+    padding: 30px;
+}
+
+.recommended-hotels, .all-hotels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Add gap between hotel boxes */
+}
+
+.hotel-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: calc(20% - 20px); /* Make boxes larger and fit better */
+    box-sizing: border-box;
+}
+
+.hotel-box h3 {
+    font-size: 1.5em; /* Increased font size */
+    margin-bottom: 15px; /* Increased margin */
+}
+
+.hotel-box p {
+    margin: 10px 0; /* Increased margin */
+}
+
+.hotel-detail-page {
+    padding: 30px;
+}
+
+.hotel-detail-page h2 {
+    font-size: 2.5em; /* Increased font size */
+}
+
+.hotel-detail-page p {
+    margin: 15px 0; /* Increased margin */
+}
+
+.reviews {
+    margin-top: 30px; /* Increased margin */
+}
+
+.review-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px; /* Increased margin */
+}
+
+.review-box h4 {
+    font-size: 1.5em; /* Increased font size */
+    margin-bottom: 10px;
+}
+
+.review-box p {
+    margin: 10px 0; /* Increased margin */
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+    margin: 30px 0; /* Increased margin */
+}
+
+.messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;  /* Add space above the pagination */
+}
+
+.pagination .step-links {
+    display: flex;
+    gap: 5px;  /* Add space between pagination links */
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #e9ecef;
+}
+
+.pagination .current {
+    font-weight: bold;
+    color: #495057;
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.filter-section {
+    margin-bottom: 15px;
+}
+
+.filter-section label {
+    display: inline-block;
+    width: 100px;
+}
+
+.filter-section input,
+.filter-section select {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-buttons {
+    margin-top: 10px;
+}
+
+.filter-buttons button[type="submit"],
+.filter-buttons .clear-filters {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.filter-buttons button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #28a745;
+}
+
+.filter-buttons button[type="submit"]:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.filter-buttons .clear-filters {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.filter-buttons .clear-filters:hover {
+    background-color: #f5c6cb;
+    color: #721c24;
+}
+
+
+
+.review-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review-form .form-group {
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.review-form input[type="number"],
+.review-form input[type="text"],
+.review-form textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.review-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffa500;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.review-form button:hover {
+    background-color: #cc8400;
+}

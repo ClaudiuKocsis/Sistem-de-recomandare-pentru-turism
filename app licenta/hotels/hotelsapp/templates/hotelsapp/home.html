@@ -1,0 +1,14 @@
+{% extends 'hotelsapp/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-page">
+    <section class="about">
+        <h1>Welcome to the Hotel Recommender</h1>
+        <p>Find the best hotel for you by reading reviews from our comunity.</p> 
+        <p>We know that the voice of the people matters!</p>
+        <button onclick="location.href='{% url 'hotels' %}'">Let's find your perfect hotel</button>
+    </section>
+</div>
+{% endblock %}
